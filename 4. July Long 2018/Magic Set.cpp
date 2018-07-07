@@ -1,19 +1,30 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define ll long long
 int main()
 {
 	int t;
 	cin>>t;
 	while(t--)
 	{
-		int n;
-		cin>>n;
-		string ans = "1";
-		for(int i=2;i<=n;i=i+2)
+		int n, m;
+		ll ans = 0;
+		cin>>n>>m;
+		int a[n];
+		for(int i=0;i<n;i++)
 		{
-			ans.push_back('0');
+			cin>>a[i];
 		}
-		cout<<"1"<<" "<<ans<<"\n";
+		int c = 0;
+		for(int i=0;i<n;i++)
+		{
+			if(a[i]%m==0)
+			{
+				c++;
+			}
+		}
+		ans = (ll)pow(2,c) - 1;
+		cout<<ans<<"\n";
 	}
 	return 0;
 }
