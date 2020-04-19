@@ -1,0 +1,40 @@
+ 
+void push(ll idx, ll s, ll e)
+{
+	if(lzy[idx]%2)
+	{
+		seg[idx] = (e - s + 1) - seg[idx];
+		if(s != e)
+		{
+			lzy[2*idx] += 1;
+			lzy[2*idx + 1] += 1;
+		}
+	}
+	lzy[idx] = 0;
+}
+ 
+void update(ll idx, ll s, ll e, ll l, ll r)
+{
+	push(idx, s, e);
+	if(e < l || s > r) return;
+	if(r >= e && l <= s)
+	{
+		lzy[idx] = 1;
+		push(idx, s, e);
+		return;
+	}
+	ll mid = (s + e)/2;
+	update(2*idx, s, mid, l, r);
+	update(2*idx + 1, mid + 1, e, l, r);
+	seg[idx] = seg[2*idx] + seg[2*idx + 1];
+}
+ 
+ll get(ll idx, ll s, ll e, ll l, ll r)
+{
+	push(idx, s, e);
+	if(e < l || s > r) return 0;
+	if(r >= e && l <= s) return seg[idx];
+	ll mid = (s + e)/2;
+	return (get(2*idx, s, mid, l, r) + get(2*idx + 1, mid + 1, e, l, r));
+}
+ 
