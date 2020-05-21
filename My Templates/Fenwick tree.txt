@@ -1,0 +1,21 @@
+// prefix sum till index pos of corresponding array
+
+ll findsum(ll pos)
+{
+	ll sum = 0;
+	for(ll i = pos; i; i -= (i & (-i)))
+	{
+		sum += fen[i];
+	}
+	return sum;
+}
+ 
+// add and update in fenwick tree
+
+void add(ll pos, ll val)
+{
+	for(ll i = pos; i <= n; i += (i & (-i)))
+	{
+		fen[i] += val;
+	}
+}
