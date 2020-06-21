@@ -1,0 +1,53 @@
+const ll r = 1e4 + 5, c = 60;
+vector<vl> G(r);
+map<ll, map<ll, ll> > m;
+ll par[r][c], depth[r], unitdepth[r], mxlift;
+
+void dfs(ll node, ll anc)
+{
+	par[node][0] = anc;
+	if(node != 1)
+	{
+		depth[node] = depth[anc] + m[node][anc];
+		unitdepth[node] = unitdepth[anc] + 1;
+	}
+	for(ll i = 0; i < G[node].size(); i++)
+	{
+		if(G[node][i] != anc)
+		{
+			dfs(G[node][i], node);
+		}
+	}
+}
+
+void lcaTable(ll n)
+{
+	dfs(1, -1);
+	for(ll i = 1; i <= mxlift; i++)
+	{
+		for(ll j = 1; j <= n; j++)
+		{
+			ll anc = par[j][i - 1];
+			if(anc != -1) par[j][i] = par[anc][i - 1];
+		}
+	}
+}
+
+ll getLca(ll src, ll dest)
+{
+	if(unitdepth[src] < unitdepth[dest]) swap(src, dest);
+	ll diff  = unitdepth[src] - unitdepth[dest];
+	for(ll i = mxlift; i >= 0; i--)
+	{
+		if((diff >> i)&1LL) src = par[src][i];
+	}
+	if(src == dest) return src;
+	for(ll i = mxlift; i >= 0; i--)
+	{
+		if(par[src][i] != -1 && par[src][i] != par[dest][i])
+		{
+			src = par[src][i], dest = par[dest][i];
+		}
+	}
+	return par[src][0];
+}
