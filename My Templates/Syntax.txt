@@ -1,0 +1,14 @@
+// policy based
+
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds; 
+typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pset;
+
+// sort in descending
+
+sort(arr, arr+n, greater<int>());
+
+// reverse priority queue
+
+priority_queue <int, vector<int>, greater<int> > pq;
