@@ -1,0 +1,41 @@
+#include <bits/stdc++.h> 
+using namespace std;
+#define ll long long
+#define pb push_back
+#define mp make_pair
+#define pl pair<ll,ll>
+#define vl vector<ll>
+
+void fastio()
+{
+	ios_base::sync_with_stdio(false);cin.tie(NULL);
+	cout<<fixed<<setprecision(10);
+}
+
+int main()
+{
+	fastio();
+	 
+	// provide stream. 
+	ifstream inFile;
+	ofstream outFile;
+	
+	// open files.
+	// Note 1: input file should already be present in the same directory where source code is present.
+	// Note 2: output file will automatically be generated in that same directory with the given name. 
+	inFile.open("input_file_name.txt");
+	outFile.open("output_file_name.txt");
+	
+	// incase of failure
+	if(inFile.fail())
+	{
+		cerr<<"Unable to open file!"<<"\n";
+		return 0;
+	}
+	
+	cin>>  becomes inFile>>;
+	cout<< becomes outFile<<;
+	
+	outFile.close();
+	return 0;
+}
